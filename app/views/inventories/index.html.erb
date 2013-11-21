@@ -1,0 +1,98 @@
+<h1 class="page-header">Inventories</h1>
+
+<div class="row-fluid">
+  <div class="span9">
+    <div>
+      <h2 class="section-header">Inventories
+        <span class="pull-right">
+          <a href="#searchModal" role="button" class="btn btn-iconize" data-toggle="modal" data-btn-iconize="icon-search">
+            <i class="icon-search"></i> Search
+          </a>
+          <a href="#newInventory" class="btn btn-blue btn-iconize" data-btn-iconize="icon-plus" data-toggle="modal">Add</a>
+        </span>
+      </h2>
+
+      <!-- search modal -->
+      <div class="modal hide fade" id="searchModal" role="dialog">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h3>Search</h3>
+        </div>
+        <div class="modal-body">
+          <%= search_form_for @search, :html => {:class => "form-horizontal"} do |f| %>
+
+            <div class="control-group">
+              <%= f.label :name_cont, "Name", :class => 'control-label' %>
+              <div class="controls">
+                <%= f.text_field :name_cont  %>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <%= f.submit "Search", :class => "btn btn-primary" %>
+              <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- end search modal -->
+
+      <% if @inventories.blank? %>
+
+        <div class="span12">
+          <p class="text-warning">No records found.</p>
+        </div>
+        <br/>
+      
+      <% else %>
+      
+        <table class="table table-striped table-condensed">
+          <thead>
+            <th>Cleaning Solutions</th>
+						<th>Quantity</th>
+						<th>Per Price</th>
+						<th>Total Cost</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <% @inventories.each do |inventory| %>
+            <tr>
+              <td><%= inventory.blank? ? "N/A" : inventory.name %></td>
+							<td><%= inventory.blank? ? "N/A" : inventory.quantity %></td>
+							<td><%= inventory.blank? ? "N/A" : inventory.per_price %></td>
+							<td><%= inventory.blank? ? "N/A" : inventory.total_cost %></td>
+              <td>
+                <span class="btn-group pull-right">
+                  <a href="<%= edit_inventory_path(inventory) %>" class="hidden-480 btn btn-small btn-iconize" data-btn-iconize="icon-pencil">Edit</a>
+                  
+                  <%= link_to inventory_path(inventory), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                    :class => 'hidden-480 btn btn-small btn-danger btn-iconize',
+                    :'data-btn-iconize' => 'icon-remove',
+                    :title => "Delete" do%>Delete
+                  <%end%>                  
+                </span>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      
+      <% end %>
+
+    </div>
+
+		<!-- new user modal -->
+		<div class="modal hide fade" id="newInventory" role="dialog">
+		  <div class="modal-header">
+		    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		    <h3>New Inventory</h3>
+		  </div>
+		  <div class="modal-body">
+		    <%= render :partial => 'form' %>
+		  </div>
+		</div>
+		<!-- end new user modal -->
+		
+  </div><!--span-->
+</div>

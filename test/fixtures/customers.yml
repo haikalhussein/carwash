@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  num_plate: MyString
+  type_of_car: 1
+  type_of_washing_cleaning_id: 1
+  is_member: false
+
+two:
+  num_plate: MyString
+  type_of_car: 1
+  type_of_washing_cleaning_id: 1
+  is_member: false

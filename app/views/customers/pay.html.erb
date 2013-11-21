@@ -1,0 +1,64 @@
+<div class="row-fluid">
+  <div class="span3">
+		<h2 class="section-header"><%= @customer.num_plate %>
+    </h2>
+		<br />
+		<address>
+      <abbr title="Car Type">Car Type: <%= @customer.car.name %></abbr><br />
+      <abbr title="Type of Washing / Cleaning">Washing Type: <%= @customer.type_of_cleaning_and_washing.name %></abbr><br />
+		</address>
+	</div>
+	<div class="span9">
+    <div>
+      <h2 class="section-header">Customer Info
+        <span class="pull-right">
+					<a href="<%= customers_path %>" class="btn btn-iconize" data-btn-iconize="icon-arrow-left">Back</a>
+          <a href="#newCustomerInfo" class="btn btn-blue btn-iconize" data-btn-iconize="icon-plus" data-toggle="modal">Add</a>
+        </span>
+      </h2>
+
+		<% if @customer.blank? %>
+			<div class="span12">
+        <p class="text-warning">No records found.</p>
+      </div>
+		<% else %>
+      <table class="table table-striped table-condensed">
+        <tbody>
+          <tr>
+            <td>Name</td>
+            <td><%= @customer.name.blank? ? "N/A" : @customer.name %></td>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td><%= @customer.email.blank? ? "N/A" : @customer.email %></td>
+          </tr>
+          <tr>
+            <td>Address</td>
+            <td><%= @customer.address.blank? ? "N/A" : @customer.address %></td>
+          </tr>
+          <tr>
+            <td>Type of Membership</td>
+            <td><%= @customer.membership.blank? ? "Currently Not a member of Q Seven Car Wash Centre" : @customer.membership.name %></td>
+          </tr>
+          <tr>
+            <td>Mobile Number</td>
+            <td><%= @customer.mobile_number.blank? ? "N/A" : @customer.mobile_number %></td>
+          </tr>
+        </tbody>
+      </table>
+		<% end %>
+		
+		<!-- new customer info modal -->
+		<div class="modal hide fade" id="newCustomerInfo" role="dialog">
+		  <div class="modal-header">
+		    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		    <h3>Create Customer Info</h3>
+		  </div>
+		  <div class="modal-body">
+		    <%= render :partial => 'customer_info' %>
+		  </div>
+		</div>
+		<!-- end new user modal -->
+    </div>
+	</div>
+</div>

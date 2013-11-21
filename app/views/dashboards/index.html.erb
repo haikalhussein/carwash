@@ -1,0 +1,82 @@
+<div class="tabbable"> <!-- Only required for left/right tabs -->
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#year" data-toggle="tab">Yearly Sales</a></li>
+    <li><a href="#month" data-toggle="tab">Monthly Sales</a></li>
+		<li><a href="#day" data-toggle="tab">Daily Sales</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="year">
+      <div class="row-fluid">
+				<h2 class="section-header">Sales Year <%= Time.now.strftime('%Y') %> : RM <%= @customers_year.sum(&:price)%></h2>
+				<body>
+				    <!--Div that will hold the pie chart-->
+				    <div id="chart_div" style="width:400; height:300"></div>
+				</body>
+			</div>
+			
+    </div>
+    <div class="tab-pane" id="month">
+      <div class="row-fluid">
+				<h2 class="section-header">Sales Month <%= Time.now.strftime("%B #{Time.now.year}")%> : RM <%= @customers_month.sum(&:price)%></h2>
+				<body>
+				    <!--Div that will hold the pie chart-->
+				    <div id="chart_div" style="width:400; height:300"></div>
+				</body>
+			</div>
+    </div>
+		<div class="tab-pane" id="day">
+      <div class="row-fluid">
+				<h2 class="section-header">Sales Day <%= Time.now.strftime("%d %B #{Time.now.year}") %> : RM <%= @customers_day.sum(&:price)%></h2>
+				<body>
+				    <!--Div that will hold the pie chart-->
+				    <div id="chart_div" style="width:400; height:300"></div>
+				</body>
+			</div>
+    </div>
+  </div>
+</div>
+
+
+
+<% content_for :javascript do %>
+<%= javascript_include_tag "https://www.google.com/jsapi"  %>
+  <script type="text/javascript">
+
+		google.load("visualization", "1", {packages:["corechart"]});
+		      google.setOnLoadCallback(drawChart);
+		      function drawChart() {
+						
+						var fruits = []
+						
+						
+						fruits.push({'name':'Offered:(Main:31, RC:19)', 'count':'31', 'rc':'19'})
+						fruits.push({'name':'Accepted:(Main:14, RC:12)', 'count':'14', 'rc':'12'})
+						fruits.push({'name':'KIV:(Main:17, RC:12)', 'count':'17', 'rc':'12'})
+						fruits.push({'name':'Rejected:(Main:8, RC:2)', 'count':'8', 'rc':'2'})
+						
+						var StatusArr = [['Year', 'Sales', 'Expenses']];
+						for (var i = 0; i < 4; i++) {
+							StatusArr.push([fruits[i].name, fruits[i].count, fruits[i].rc])
+						}
+		        var options = {
+		          title: 'Company Sales',
+		          vAxis: {title: 'Vol', titleTextStyle: {color: 'blue'} },
+              hAxis: {title: 'Status', titleTextStyle: {color: 'red'}}
+		        };
+		
+		        var data = google.visualization.arrayToDataTable(StatusArr);
+		
+            if(document.getElementById("year")){
+							var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+						} else if(document.getElementById("month")) {
+							var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+						} else if(document.getElementById("day")) {
+							var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+						} else {
+							var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+						}        
+		        chart.draw(data, options);
+		      }
+
+  </script>
+<% end %>

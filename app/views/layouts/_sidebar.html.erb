@@ -1,0 +1,12 @@
+ <div>
+  <ul class="nav nav-list">
+      <li <%= "class=active" if controller.controller_name == "users" %>><a href="<%= users_path%>">Users</a></li>
+      <li <%= "class=active" if(controller.controller_name == "inventories") %>><a href="<%= inventories_path %>">Inventories</a></li>
+			<li <%= "class=active" if(controller.controller_name == "customers") %>><a href="<%= customers_path %>">Customers</a></li>
+			<li <%= "class=active" if(controller.controller_name == "cars") %>><a href="<%= cars_path %>">Type of Cars</a></li>
+			<li <%= "class=active" if(controller.controller_name == "type_of_cleaning_and_washings") %>><a href="<%= type_of_cleaning_and_washings_path %>">Type of Washings</a></li>
+			<li <%= "class=active" if(controller.controller_name == "memberships") %>><a href="<%= memberships_path %>">Type of Memberships</a></li>
+		
+  </ul>
+</div>
+

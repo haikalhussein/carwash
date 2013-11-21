@@ -1,0 +1,20 @@
+<div class="primary-tabs">
+  <ul class="nav nav-tabs">
+     <% if user_signed_in? %>
+			 <% if (current_user.has_role? "admin") %>
+				<li <%= "class=active" if controller.controller_name =~ /dashboards/ %>><a href="<%= root_path %>">Dashboard</a></li>
+				<li <%= "class=active" if controller.controller_name =~ /customers/ %>><a href="<%= customers_path %>">Customers</a></li>
+				<li <%= "class=active" if controller.controller_name =~ /inventories/ %>><a href="<%= inventories_path %>">Inventories</a></li>
+				<li <%= "class=active" if controller.controller_name =~ /type_of_cleaning_and_washings/ %>><a href="<%= type_of_cleaning_and_washings_path %>">Washing and Cleaning</a></li>
+				<li <%= "class=active" if controller.controller_name =~ /memberships/ %>><a href="<%= memberships_path %>">Memberships</a></li>
+			<% else %>
+				<li <%= "class=active" if controller.controller_name =~ /dashboards/ %>><a href="<%= root_path %>">Dashboard</a></li>
+				<li <%= "class=active" if controller.controller_name =~ /customers/ %>><a href="<%= customers_path %>">Customers</a></li>
+				<li <%= "class=active" if controller.controller_name =~ /inventories/ %>><a href="<%= inventories_path %>">Inventories</a></li>
+				<li <%= "class=active" if controller.controller_name =~ /type_of_cleaning_and_washings/ %>><a href="<%= type_of_cleaning_and_washings_path %>">Washing and Cleaning</a></li>
+				<li <%= "class=active" if controller.controller_name =~ /memberships/ %>><a href="<%= memberships_path %>">Memberships</a></li>
+			<% end %>
+	 <% end %>
+  </ul>
+</div>
+

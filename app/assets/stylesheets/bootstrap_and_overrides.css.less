@@ -1,0 +1,213 @@
+@import "twitter/bootstrap/bootstrap";
+@import "twitter/bootstrap/responsive";
+
+// Set the correct sprite paths
+@iconSpritePath: asset-path("twitter/bootstrap/glyphicons-halflings");
+@iconWhiteSpritePath: asset-path("twitter/bootstrap/glyphicons-halflings-white");
+
+// Set the Font Awesome (Font Awesome is default. You can disable by commenting below lines)
+@fontAwesomeEotPath: asset-url("fontawesome-webfont.eot");
+@fontAwesomeEotPath_iefix: asset-url("fontawesome-webfont.eot#iefix");
+@fontAwesomeWoffPath: asset-url("fontawesome-webfont.woff");
+@fontAwesomeTtfPath: asset-url("fontawesome-webfont.ttf");
+@fontAwesomeSvgPath: asset-url("fontawesome-webfont.svg#fontawesomeregular");
+
+// Font Awesome
+@import "fontawesome/font-awesome";
+
+// Glyphicons
+//@import "twitter/bootstrap/sprites.less";
+
+// Your custom LESS stylesheets goes here
+//
+// Since bootstrap was imported above you have access to its mixins which
+// you may use and inherit here
+//
+// If you'd like to override bootstrap's own variables, you can do so here as well
+// See http://twitter.github.com/bootstrap/customize.html#variables for their names and documentation
+//
+// Example:
+// @linkColor: #ff0000;
+
+body.landing {
+  footer {
+    max-width: 400px;
+    padding: 10px 20px 20px;
+    margin: 20px auto 20px;
+  }
+	background: #FFCA50;
+}
+
+/** Border, Shadow **/
+.shadowed { .box-shadow (0 1px 3px rgba(0, 0, 0, 0.055)) !important; }
+.rounded { .border-radius(3px) !important; }
+
+/** Navbar, Navs **/
+.navbar {
+  font-family: @headingsFontFamily;
+  margin-bottom: 7px;
+  .nav > li > a {
+    text-transform: uppercase;
+  }
+  .small-logo {
+    .navbar > .brand;
+    padding: 5px 20px;
+    img { max-height: 30px; }
+  }  
+  form { margin: 5px; }    
+}
+.navbar-fixed-top, .navbar-fixed-bottom {
+  .navbar-inner { padding: 1px; }
+}
+.navbar-inverse {background: #FFCA50 !important}
+
+/** Nav tabs **/
+.primary-tabs { 
+  margin-top: 10px; 
+  .nav { margin-bottom: 0; }
+}
+.nav-tabs {
+  .active {
+    a, a:hover, a:focus { cursor: pointer; }
+  }
+}
+/** Sidenav **/
+.nav-header {
+  font-family: @headingsFontFamily;
+  font-size: 14px;
+}
+
+/** Headings **/
+h1,h2,h3,h4,h5,h6 {
+  text-rendering: auto;
+  .input-prepend, .input-append {
+    line-height: @baseLineHeight;   //for aligning inside headings
+  }
+  .form-inline.pull-right { padding-right: 5px; }
+}
+
+/** Page/Section Header **/
+.page-title-top {
+  text-transform: uppercase;
+  color: 0088cc;
+}
+.page-header { color: 0088cc; }
+.section-header {
+  margin: 10px 0 10px;
+  padding: 6px 0;
+  margin-bottom: 20px;
+  color: 0088cc;
+  font-size: 24px;  
+  text-transform: capitalize;
+  border-bottom: 1px solid #eee;
+  @media (max-width: 480px) {
+    & { border: none; }
+  }
+  @media (max-width: 320px) {
+    & { font-size: 18px; }
+  }  
+}
+.subsection-header {
+  .section-header;
+  font-size: 20px;
+  border: none;
+}
+
+/** Form elements **/
+.input-fluid {
+  width: 100%;
+  &.full { width: 100%; }
+  &.half { width: 50%; }
+  &.quarter { width: 25%; }
+}
+.control-label { text-transform: capitalize; }
+.control-inline {    //for allowing inline fields inside regular/horizontal forms
+  .control-group {
+    display: inline-block;
+    min-width: 49%;
+  }
+  .controls {
+    & > .radio:first-child, & > .checkbox:first-child { padding-top: 0;}
+    & > .radio, & > .checkbox { margin-right: 5px;}
+  }
+  select { 
+    max-width: 200px;
+    @media (min-width: 1200px) { min-width: 270px; max-width: inherit;}
+    @media (max-width: 979px) { min-width: 100px; max-width: 150px;}
+  }  
+}
+.form-actions { 
+  background: none;
+  border: none;
+}
+.form-horizontal-long { //just like form-horizontal but labels have smaller width
+  .form-horizontal;
+  @media (min-width: 768px) {
+    .control-label { width: 100px; }
+    .controls { margin-left: 120px; }
+    .form-actions { padding-left: 120px; }    
+  }
+  @media (max-width: 767px) {
+    .control-label {
+      float: none;
+      width: auto;
+      padding-top: 0;
+      text-align: left;
+    }
+    .controls { margin-left: 0;}
+    .control-list { padding-top: 0; }
+    .form-actions {
+      padding-left: 10px;
+      padding-right: 10px;    
+    }
+  }
+}
+.form-signin {
+	max-width: 400px;
+	padding: 19px 29px 29px;
+	margin: 20px auto 20px;
+	background-color: #FFCA50;
+	border: 1px solid #e5e5e5;
+  .border-radius(5px);
+  .checkbox { margin-bottom: 20px;  }
+  .form-signin-heading {  margin-bottom: 20px; }
+  input[type="text"], input[type="email"], input[type="password"] {
+    font-size: 16px;
+    height: 30px;
+    margin-bottom: 0;
+    padding-right: 0;
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  form { margin-bottom: 0;}
+}
+
+/** Well **/
+@wellBackground: #ffffff;
+.well {
+  min-height: 20px;
+  padding: 19px;
+  margin-bottom: 12px;
+  background-color: @wellBackground;
+  border: 1px solid darken(@wellBackground, 10%);
+ .border-radius(0);
+ .box-shadow(none);
+  blockquote {
+    border-color: #ddd;
+    border-color: rgba(0,0,0,.15);
+  }
+}
+.well-tabbed {
+  .well;
+  border-top: none;
+  border-color: #ddd;
+}
+.well-large {
+  padding: 24px;
+ .border-radius(0);
+}
+.well-small {
+  padding: 9px;
+ .border-radius(0);
+}

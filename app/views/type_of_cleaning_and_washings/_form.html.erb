@@ -1,0 +1,12 @@
+<%= simple_form_for @type_of_cleaning_and_washing, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :name %>
+  <%= f.input :price %>
+  <%= f.input :mem_price %>
+	<%= f.input :car_id, collection: Car.all %>
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+		<br />
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                type_of_cleaning_and_washings_path, :class => 'btn' %>
+  </div>
+<% end %>

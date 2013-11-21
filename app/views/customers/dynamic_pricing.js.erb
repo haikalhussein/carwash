@@ -1,0 +1,4 @@
+$("#customer_price").empty();
+<% @prices.each do |clean| %>
+  $("#customer_price").append("<%= escape_javascript(render :partial => "customers/customer_price", :locals => {:clean => clean})%>");
+<% end %>

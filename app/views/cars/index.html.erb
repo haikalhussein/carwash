@@ -1,0 +1,92 @@
+<h1 class="page-header">Cars</h1>
+
+<div class="row-fluid">
+  <div class="span9">
+    <div>
+      <h2 class="section-header">Cars
+        <span class="pull-right">
+          <a href="#searchModal" role="button" class="btn btn-iconize" data-toggle="modal" data-btn-iconize="icon-search">
+            <i class="icon-search"></i> Search
+          </a>
+          <a href="#newCar" class="btn btn-blue btn-iconize" data-btn-iconize="icon-plus" data-toggle="modal">Add</a>
+        </span>
+      </h2>
+
+      <!-- search modal -->
+      <div class="modal hide fade" id="searchModal" role="dialog">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h3>Search</h3>
+        </div>
+        <div class="modal-body">
+          <%= search_form_for @search, :html => {:class => "form-horizontal"} do |f| %>
+
+            <div class="control-group">
+              <%= f.label :name_cont, "Name", :class => 'control-label' %>
+              <div class="controls">
+                <%= f.text_field :name_cont  %>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <%= f.submit "Search", :class => "btn btn-primary" %>
+              <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- end search modal -->
+
+      <% if @cars.blank? %>
+
+        <div class="span12">
+          <p class="text-warning">No records found.</p>
+        </div>
+        <br/>
+      
+      <% else %>
+      
+        <table class="table table-striped table-condensed">
+          <thead>
+            <th>Car Type Name</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <% @cars.each do |car| %>
+            <tr>
+              <td><%= car.blank? ? "N/A" : car.name %></td>
+              <td>
+                <span class="btn-group pull-right">
+                  <a href="<%= edit_car_path(car) %>" class="hidden-480 btn btn-small btn-iconize" data-btn-iconize="icon-pencil">Edit</a>
+                  
+                  <%= link_to car_path(car), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                    :class => 'hidden-480 btn btn-small btn-danger btn-iconize',
+                    :'data-btn-iconize' => 'icon-remove',
+                    :title => "Delete" do%>Delete
+                  <%end%>                  
+                </span>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      
+      <% end %>
+
+    </div>
+
+		<!-- new user modal -->
+		<div class="modal hide fade" id="newCar" role="dialog">
+		  <div class="modal-header">
+		    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		    <h3>New Type of Car</h3>
+		  </div>
+		  <div class="modal-body">
+		    <%= render :partial => 'form' %>
+		  </div>
+		</div>
+		<!-- end new user modal -->
+		
+  </div><!--span-->
+</div>

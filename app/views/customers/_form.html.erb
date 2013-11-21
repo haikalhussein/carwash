@@ -1,0 +1,79 @@
+<%= simple_form_for @customer, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :num_plate %>
+  <%= f.input :type_of_car_id, collection: Car.all %>
+  <%= f.input :type_of_cleaning_and_washing_id, collection: TypeOfCleaningAndWashing.all %>
+	
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                customers_path, :class => 'btn' %>
+  </div>
+<% end %>
+
+<% content_for :javascript do %>
+  <script type="text/javascript">
+  $(document).ready(function() {
+    
+    // $('#intake_commencement_date').datepicker({dateFormat:"dd-mm-yy", changeMonth: true, changeYear: true});
+    //$('#intake_registration_date').datepicker({dateFormat:"dd-mm-yy", changeMonth: true, changeYear: true});
+		// onchange when select program level
+    // $('#customer_type_of_cleaning_and_washing_id').change(function(){
+    //   var cleaning_id = $('#customer_type_of_cleaning_and_washing_id').val()
+    //   if(cleaning_id == ""){
+    //       $('#customer_price').hide();
+    //   }else{
+    // 				$('#customer_price').show();
+    //     $.ajax({
+    //       url: "/customers/dynamic_pricing",
+    //       type: "PUT",
+    //       data: "cleaning_id="+cleaning_id,
+    //       dataType:"script",
+    //       async:false,
+    //       cache:false,
+    //       success: function(response){}
+    //     })
+    // 
+    //   }
+    // 
+    // 
+    //   
+    // 
+    // });
+    // end onchange when select program level
+
+		// $('#customer_is_member').click(function(){
+		//       var cleaning_id = $('#customer_type_of_cleaning_and_washing_id').val()
+		//       if(document.getElementById("customer_is_member").checked == true && cleaning_id) 
+		// 	{
+		// 		$('#customer_price').hide();
+		// 		$('#customer_price_member').show();
+		//         $.ajax({
+		//           url: "/customers/dynamic_price_member",
+		//           type: "PUT",
+		//           data: "cleaning_id="+cleaning_id,
+		//           dataType:"script",
+		//           async:false,
+		//           cache:false,
+		//           success: function(response){}
+		//         })
+		// 	}
+		// 	else if(document.getElementById("customer_is_member").checked == false)
+		// 	{
+		// 		
+		// 		$('#customer_price_member').hide();
+		//       }
+		// 	else
+		// 	{
+		// 		$('#customer_price_member').hide();
+		// 		$('#customer_price').hide();
+		//       }
+		// 
+		// 
+		//       
+		// 
+		//     });
+		//     // end onchange when select program level
+
+  });
+  </script>
+<% end %>

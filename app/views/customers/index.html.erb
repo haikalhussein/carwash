@@ -1,0 +1,132 @@
+
+<h1 class="page-header">Customers</h1>
+<div class="row-fluid">
+	<div class="span3">
+	  <div class="well sidebar-nav">
+	    <ul class="nav nav-list">
+	      <li class="nav-header">Sidebar</li>
+					<%= render :partial => "layouts/sidebar" %>
+	    </ul>
+	  </div><!--/.well -->
+	</div><!--/span-->
+  <div class="span9">
+    <div>
+      <h2 class="section-header">Customers
+        <span class="pull-right">
+          <a href="#searchModal" role="button" class="btn btn-iconize" data-toggle="modal" data-btn-iconize="icon-search">
+            <i class="icon-search"></i> Search
+          </a>
+          <a href="#newCustomer" class="btn btn-blue btn-iconize" data-btn-iconize="icon-plus" data-toggle="modal">Add</a>
+        </span>
+      </h2>
+
+      <!-- search modal -->
+      <div class="modal hide fade" id="searchModal" role="dialog">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h3>Search</h3>
+        </div>
+        <div class="modal-body">
+          <%= search_form_for @search, :html => {:class => "form-horizontal"} do |f| %>
+
+            <div class="control-group">
+              <%= f.label :num_plate_cont, "Car Registration Number", :class => 'control-label' %>
+              <div class="controls">
+                <%= f.text_field :num_plate_cont  %>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <%= f.submit "Search", :class => "btn btn-primary" %>
+              <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- end search modal -->
+
+      <% if @customers.blank? %>
+
+        <div class="span12">
+          <p class="text-warning">No records found.</p>
+        </div>
+        <br/>
+      
+      <% else %>
+      
+        <table class="table table-striped table-condensed tablesorter">
+          <thead>
+            <th>Car Registration Number</th>
+						<th>Type of Car</th>
+						<th>Type of Washing</th>
+						<th>Q7 Car Wash Member</th>
+						<th>Price</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <% @customers.each do |customer| %>
+            <tr>
+              <td><%= customer.blank? ? "N/A" : customer.num_plate %></td>
+							<td><%= customer.blank? ? "N/A" : customer.car.name %></td>
+							<td><%= customer.blank? ? "N/A" : customer.type_of_cleaning_and_washing.name %></td>
+							<% if customer.is_member? %>
+								<td>Yes</td>
+							<% else %>
+								<td>No</td>
+							<% end %>
+							<td><%= customer.blank? ? "N/A" : customer.price %></td>
+              <td>
+                <span class="btn-group pull-right">
+                  <a href="<%= edit_customer_path(customer) %>" class="hidden-480 btn btn-small btn-iconize" data-btn-iconize="icon-pencil">Edit</a>
+									<% if customer.paid? %>
+                  	<a href="#" class="hidden-480 btn btn-small btn-success btn-iconize" data-btn-iconize="icon-pencil">Paid</a>
+									<% else %>
+										<a href="<%= pay_customer_path(customer) %>" class="hidden-480 btn btn-small btn-warning btn-iconize" data-btn-iconize="icon-pencil">Pay</a>
+									<% end %>
+                                  
+                </span>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      
+      <% end %>
+
+    </div>
+
+		<!-- new user modal -->
+		<div class="modal hide fade" id="newCustomer" role="dialog">
+		  <div class="modal-header">
+		    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		    <h3>New Customer</h3>
+		  </div>
+		  <div class="modal-body">
+		    <%= render partial: 'form' %>
+		  </div>
+		</div>
+		<!-- end new user modal -->
+		
+  </div><!--span-->
+</div>
+
+
+<%= content_for :javascript do %>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $(".tablesorter").tablesorter({
+        headers : {
+            6: {
+                sorter: false
+            },
+            7: {
+                sorter: false
+            }
+        }
+        });
+
+    });
+
+  </script>
+<% end %>
